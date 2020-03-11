@@ -14,9 +14,9 @@ export const BrandIcon = props => (
 
 export const Brand = props => (
   <NavbarBrand tag={Link} to="/" className="brand-logo">
-    <BrandIcon />
-    <span className="brand-title">HINX</span>
-    <span className="navbar-version">{appConfig.VERSION}</span>
+    {/* <BrandIcon /> */}
+    <span className="brand-title">HINX - <small>Entity Explorer for HINs</small></span>
+    {/* <span className="navbar-version">{appConfig.VERSION}</span> */}
   </NavbarBrand>
 );
 
