@@ -1,9 +1,5 @@
 package athenarc.imis.sdl.config;
 
-import athenarc.imis.sdl.security.*;
-import athenarc.imis.sdl.security.jwt.*;
-
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Import;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -16,6 +12,10 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import org.springframework.security.web.header.writers.ReferrerPolicyHeaderWriter;
 import org.springframework.web.filter.CorsFilter;
 import org.zalando.problem.spring.web.advice.security.SecurityProblemSupport;
+
+import athenarc.imis.sdl.security.AuthoritiesConstants;
+import athenarc.imis.sdl.security.jwt.JWTConfigurer;
+import athenarc.imis.sdl.security.jwt.TokenProvider;
 
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true)
@@ -69,6 +69,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
         .and()
             .authorizeRequests()
+            .antMatchers("/api/datasets/**").permitAll()
+            .antMatchers("/api/simsearch/**").permitAll()
+
             .antMatchers("/api/authenticate").permitAll()
             .antMatchers("/api/**").authenticated()
             .antMatchers("/management/health").permitAll()
