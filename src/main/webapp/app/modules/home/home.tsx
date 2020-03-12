@@ -111,8 +111,10 @@ export class Home extends React.Component<IHomeProps> {
 
   handleSourceEntity(e) {
     e.preventDefault();
+    console.warn(this.getSourceAttributeOptions());
     this.setState({
-      entity: e.target.value
+      entity: e.target.value,
+      attribute: this.getSourceAttributeOptions()[0].props.value,
     });
   }
 
@@ -193,7 +195,7 @@ export class Home extends React.Component<IHomeProps> {
                 <Label for="source_node"><h4>3. Select source node</h4></Label>
                 <AutocompleteInput 
                   id="targetEntityInput"
-                  placeholder={''}
+                  placeholder={`Search ${this.state.entity} by ${this.state.attribute}`}
                   onChange={this.handleSourceNode.bind(this)}								
                   entity={this.state.entity}
                   field={this.state.attribute}
@@ -236,6 +238,11 @@ export class Home extends React.Component<IHomeProps> {
                 })
             }
             </div>
+          </Col>
+        </Row>
+        <Row>
+          <Col md={{size: 4, offset: 4}}>
+            <Button color="primary" block><FontAwesomeIcon icon="cogs" /> Execute analysis</Button>
           </Col>
         </Row>
 			</Container>

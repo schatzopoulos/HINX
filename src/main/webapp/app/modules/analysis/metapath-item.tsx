@@ -41,35 +41,46 @@ export class MetapathItem extends React.Component<IMetapathItemProps> {
     handleSliderChange(e) {
         console.warn(e);
     }
+
+    handleRemoval(e) {
+
+    }
 	render() {
         const temporal = this.props.metapath.includes('A');
         const spatial = this.props.metapath.includes('L');
 
         return (
             <Row form key={this.props.metapath}>
-                <Col md='3'>
+                <Col md='2'>
                     <h5>{ this.props.metapath }</h5>
                 </Col>
                 <Col md='4'>
                     <Slider min={0} marks={this.marks} included={false} defaultValue={50} onChange={this.handleSliderChange.bind(this)} />
                 </Col>
                 <Col md={{offset: 1, size: 4}}>
+                    <Row>
                     <Col md='6'>
                     {
                         (temporal) && <Label check>
-                                <Input type="checkbox" /> Combine temporal
+                                <Input type="checkbox" /> Temporal
                             </Label>   
                     }
+                    {/* &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; */}
                     </Col>
                     <Col md='6'>
                     {
                         (spatial) && <Label check>
-                                <Input type="checkbox" /> Combine spatial
+                                <Input type="checkbox" /> Spatial
                             </Label>
                     }
                     </Col>
+                    </Row>
+                    
                 </Col>
-                
+                <Col md='1'>
+                    <Button color="danger" outline size="sm" title="Remove metapath" onClick={this.handleRemoval}><FontAwesomeIcon icon="minus" /></Button>
+                </Col>
+                <Col md='12'>&nbsp;</Col>
             </Row>
         );
 	}
